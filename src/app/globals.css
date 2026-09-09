@@ -166,32 +166,48 @@ svg {
 }
 .wordmark {
   display: flex;
-  align-items: baseline;
-  font-family: var(--display);
-  font-size: 39px;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: -3px;
-  transition: font-size 280ms ease;
+  align-items: center;
+  color: var(--text);
 }
-.wordmark > span:first-child {
-  color: var(--accent);
+.brand-mark {
+  width: 43px;
+  height: 43px;
+  overflow: visible;
+  transition:
+    width 280ms ease,
+    height 280ms ease,
+    filter 180ms ease;
+}
+.brand-mark-d {
+  stroke: var(--accent);
+}
+.brand-mark-a {
+  stroke: currentColor;
+}
+.brand-mark-node {
+  fill: var(--accent);
+}
+.wordmark:hover .brand-mark {
+  filter: drop-shadow(
+    0 0 8px color-mix(in srgb, var(--accent) 36%, transparent)
+  );
 }
 .wordmark-name {
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: 0.08em;
-  margin-left: 22px;
+  margin-left: 15px;
   font-weight: 400;
   transition:
     margin-left 280ms ease,
     font-size 280ms ease;
 }
-.site-header.is-compact .wordmark {
-  font-size: 32px;
+.site-header.is-compact .brand-mark {
+  width: 35px;
+  height: 35px;
 }
 .site-header.is-compact .wordmark-name {
-  margin-left: 17px;
+  margin-left: 13px;
   font-size: 11px;
 }
 .desktop-nav {
@@ -1842,13 +1858,14 @@ svg {
   .desktop-nav {
     display: none;
   }
-  .wordmark {
-    font-size: 35px;
+  .brand-mark {
+    width: 39px;
+    height: 39px;
   }
   .wordmark-name {
     display: block;
     font-size: 12px;
-    margin-left: 16px;
+    margin-left: 13px;
   }
   .header-inner {
     gap: 10px;

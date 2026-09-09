@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent as ReactMouseEvent } from "react";
+import { BrandMark } from "@/components/ui/brand-mark";
 
 const links = [
   ["Work", "work"],
@@ -123,7 +124,7 @@ export function Header() {
           aria-label="Daniel Alanaz home"
           onClick={(event) => navigateWithinHome(event)}
         >
-          da<span>.</span>
+          <BrandMark className="brand-mark" />
           <span className="wordmark-name">DANIEL ALANAZ</span>
         </Link>
         <nav aria-label="Main navigation" className="desktop-nav">
