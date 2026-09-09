@@ -138,9 +138,21 @@ svg {
 .site-header {
   height: 92px;
   border-bottom: 1px solid var(--border);
-  position: relative;
-  z-index: 30;
-  background: rgba(10, 14, 16, 0.94);
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: rgba(10, 14, 16, 0.78);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  transition:
+    height 280ms ease,
+    background-color 280ms ease,
+    box-shadow 280ms ease;
+}
+.site-header.is-compact {
+  height: 68px;
+  background: rgba(10, 14, 16, 0.9);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.2);
 }
 .header-inner {
   max-width: var(--shell);
@@ -160,6 +172,7 @@ svg {
   line-height: 1;
   font-weight: 600;
   letter-spacing: -3px;
+  transition: font-size 280ms ease;
 }
 .wordmark > span:first-child {
   color: var(--accent);
@@ -170,12 +183,44 @@ svg {
   letter-spacing: 0.08em;
   margin-left: 22px;
   font-weight: 400;
+  transition:
+    margin-left 280ms ease,
+    font-size 280ms ease;
+}
+.site-header.is-compact .wordmark {
+  font-size: 32px;
+}
+.site-header.is-compact .wordmark-name {
+  margin-left: 17px;
+  font-size: 11px;
 }
 .desktop-nav {
   display: flex;
   gap: 32px;
   font-size: 13px;
   color: #aab2b6;
+}
+.desktop-nav a {
+  position: relative;
+  transition: color 180ms ease;
+}
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -10px;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 180ms ease;
+}
+.desktop-nav a[aria-current="location"] {
+  color: var(--accent);
+}
+.desktop-nav a[aria-current="location"]::after {
+  transform: scaleX(1);
 }
 .desktop-nav a:hover,
 .text-link:hover {
@@ -192,6 +237,10 @@ svg {
 }
 .header-contact:hover {
   border-color: var(--accent);
+}
+.header-contact[aria-current="location"] {
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 .menu-toggle {
   display: none;
@@ -311,10 +360,38 @@ svg {
   inset: 0;
 }
 .canvas-layer canvas {
-  touch-action: pan-y;
+  touch-action: none;
+  cursor: grab;
 }
-.hero-art:has(canvas) .scene-fallback {
+.canvas-layer canvas[data-dragging="true"] {
+  cursor: grabbing;
+}
+.canvas-layer canvas:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: -14px;
+  border-radius: 8px;
+}
+.scene-hint,
+.scene-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.coordinate-top,
+.art-axis {
+  pointer-events: none;
+}
+.coordinate-bottom {
+  flex-wrap: wrap;
+}
+.scene-actions {
+  margin-left: auto;
+}
+.hero-art.has-webgl .scene-fallback {
   opacity: 0.22;
+}
+.hero-art.is-fallback .scene-fallback {
+  opacity: 0.95;
 }
 .art-coordinate {
   position: absolute;
@@ -1326,6 +1403,38 @@ svg {
   color: var(--accent);
   margin-top: 5px;
 }
+.scope-note {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 18px;
+  margin-top: 28px;
+  padding: 20px;
+  border-left: 2px solid var(--accent);
+  background: #0d1716;
+}
+.scope-note > .mono {
+  color: var(--accent);
+  font-size: 12px;
+  padding-top: 5px;
+}
+.leadership-scope {
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+}
+.case-content .leadership-scope li {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  align-items: start;
+}
+.leadership-scope li > .mono {
+  color: var(--accent);
+  padding-top: 4px;
+}
+.case-content .leadership-scope p {
+  font-size: 15px;
+  line-height: 1.8;
+}
 .case-conversation {
   padding: 30px;
   background: #101e1b;
@@ -1495,6 +1604,9 @@ svg {
   }
   .site-header {
     height: 76px;
+  }
+  .site-header.is-compact {
+    height: 66px;
   }
   .desktop-nav {
     gap: 19px;
@@ -1751,11 +1863,13 @@ svg {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 75px;
+    top: 100%;
     left: 0;
     right: 0;
     padding: 10px 20px 20px;
-    background: #10181a;
+    background: rgba(16, 24, 26, 0.96);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
     border-bottom: 1px solid var(--border);
     box-shadow: 0 20px 30px #0005;
   }
@@ -1766,6 +1880,9 @@ svg {
     justify-content: space-between;
     border-bottom: 1px solid #24312d;
     font-size: 15px;
+  }
+  .mobile-nav a[aria-current="location"] {
+    color: var(--accent);
   }
   .hero {
     padding-top: 25px;
@@ -2215,6 +2332,10 @@ svg {
   max-width: 620px;
 }
 @media (max-width: 560px) {
+  .scope-note {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
   .hero-topline .eyebrow {
     font-size: 12px;
     max-width: 340px;

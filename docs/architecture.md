@@ -20,6 +20,10 @@ One canvas, capped at 1.5 device pixel ratio. The torus knot uses 180 tubular se
 
 An IntersectionObserver and document visibility events switch rendering off when the scene is not visible. A pause button gives visitors explicit control. Reduced-motion users receive a static geometric treatment; native scrolling remains unchanged.
 
+The sculpture supports mouse/touch rotation through an isolated Three.js OrbitControls adapter, with damping, bounded vertical orbit, and no zoom or pan. Arrow keys rotate the focused canvas; Home and the reset button restore the initial camera view. Pausing ambient animation switches the canvas to demand rendering, allowing direct manipulation without a continuous idle loop. Interaction-driven frames settle after damping. Controls and DOM listeners are disposed on unmount.
+
+The hero uses a spring-smoothed scroll offset: the sculpture travels up to 48 pixels while its backdrop moves 24 pixels in the opposite direction. Small pointer offsets add another layer of depth. Reduced-motion preferences disable these effects. Touch drags are captured only inside the canvas; the surrounding page and mouse wheel retain native scrolling.
+
 The decorative hero and SVG capability maps are authored graphics. They are not representations of unverified project architecture. Interactive 3D is isolated from readable HTML and contact actions.
 
 ## Styling and reuse

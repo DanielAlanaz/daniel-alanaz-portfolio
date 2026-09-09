@@ -2,8 +2,10 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
+import { OrbitController } from "./orbit-controller";
+import { CanvasLifecycle } from "./canvas-lifecycle";
 
-function Sculpture() {
+function Sculpture({ playing }: { playing: boolean }) {
   const group = useRef<THREE.Group>(null);
   const ring = useRef<THREE.Mesh>(null);
   const particles = useMemo(() => {
@@ -18,8 +20,8 @@ function Sculpture() {
     return positions;
   }, []);
   useFrame((state, delta) => {
+    if (!playing) return;
     if (group.current) {
-      group.current.rotation.y += Math.min(delta, 0.04) * 0.09;
       group.current.rotation.x = THREE.MathUtils.damp(
         group.current.rotation.x,
         0.35 + state.pointer.y * 0.15,
@@ -28,11 +30,16 @@ function Sculpture() {
       );
       group.current.position.x = THREE.MathUtils.damp(
         group.current.position.x,
-        state.pointer.x * 0.15,
+        state.pointer.x * 0.08,
         2,
         delta,
       );
-      group.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.08;
+      group.current.position.y = THREE.MathUtils.damp(
+        group.current.position.y,
+        Math.sin(state.clock.elapsedTime * 0.5) * 0.06 + state.pointer.y * 0.06,
+        2,
+        delta,
+      );
     }
     if (ring.current) ring.current.rotation.z += Math.min(delta, 0.04) * 0.03;
   });
@@ -76,15 +83,26 @@ function Sculpture() {
     </>
   );
 }
-export default function Scene({ active }: { active: boolean }) {
+
+export default function Scene({
+  active,
+  resetKey,
+  onContextChange,
+}: {
+  active: boolean;
+  resetKey: number;
+  onContextChange: (ready: boolean) => void;
+}) {
   return (
     <Canvas
       camera={{ position: [0, 0, 6.6], fov: 44 }}
       dpr={[1, 1.5]}
-      frameloop={active ? "always" : "never"}
-      gl={{ antialias: true, alpha: true, powerPreference: "low-power" }}
+      frameloop={active ? "always" : "demand"}
+      gl={{ antialias: false, alpha: true, powerPreference: "default" }}
     >
-      <Sculpture />
+      <CanvasLifecycle active={active} onContextChange={onContextChange} />
+      <OrbitController playing={active} resetKey={resetKey} />
+      <Sculpture playing={active} />
     </Canvas>
   );
 }

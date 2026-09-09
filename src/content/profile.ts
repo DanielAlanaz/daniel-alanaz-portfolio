@@ -1,7 +1,7 @@
 export const profile = {
   name: "Daniel Alanaz",
   email: "Daniel.alanaz99@gmail.com",
-  linkedin: "https://linkedin.com/in/daniel-alanaz",
+  linkedin: "https://www.linkedin.com/in/daniel-alanaz-958b8a190",
   location: "Beirut, Lebanon",
   cv: "/daniel-alanaz-cv.pdf",
 };
@@ -13,8 +13,12 @@ export const experience = [
     date: "APR 2023 — ONWARD",
     type: "Enterprise engineering",
     description:
-      "Architecture, APIs, and enterprise platforms. Leading technical delivery through sprint planning, code reviews, development standards, and mentorship.",
-    tags: ["ASP.NET Core", "React / Next.js", "Cloud & CI/CD"],
+      "Lead product and technical delivery across enterprise platforms: client discovery, business workflows, architecture, team direction, code quality, cloud operations, releases, and ongoing support.",
+    tags: [
+      "Product leadership",
+      "Full-stack architecture",
+      "Enterprise systems",
+    ],
   },
   {
     company: "RAION DIGITAL",
@@ -31,7 +35,7 @@ export const experience = [
     date: "JAN 2023 — ONWARD",
     type: "Alongside employment",
     description:
-      "Built AI-assisted workflows that connect Telegram, speech-to-text, summarization, and Google Drive to automate coaching session processing.",
+      "Built a Telegram assistant for transcription, cross-session context, coach-configured reference methods, and archiving audio, reflections, and progress in Google Drive.",
     tags: ["Python", "AI integrations", "Automation"],
   },
 ];
@@ -39,17 +43,20 @@ export const experience = [
 export const skillGroups = [
   {
     name: "Architecture",
-    description: "Designing the system and helping the team deliver it.",
+    description:
+      "Connecting product decisions to a system the team can deliver.",
     skills: [
       "System design",
+      "Product discovery",
       "Microservices",
+      "Multi-tenancy",
       "Offline-first",
       "API design",
       "Code reviews",
       "Team leadership",
     ],
     evidence:
-      "Enterprise architecture, sprint planning, development standards, and mentorship at Silicon Computer Systems.",
+      "Leading ideas from client and business discovery through architecture, planning, engineering standards, delivery, and support.",
     href: "/projects/enterprise-systems/",
   },
   {
@@ -57,14 +64,15 @@ export const skillGroups = [
     description: "The foundations behind reliable applications.",
     skills: [
       "C# / .NET Core",
+      "Entity Framework Core",
       "Python",
-      "Flask",
+      "PostgreSQL",
       "SQL Server",
-      "MySQL",
-      "Laravel",
+      "Hangfire",
+      "OpenIddict / OAuth",
     ],
     evidence:
-      "Backend services and REST APIs across enterprise, web, and mobile applications.",
+      "Multi-tenant .NET services, business APIs, background processing, database migration, accounting workflows, and AI integrations across QuantaBooks and enterprise products.",
     href: "/projects/enterprise-systems/",
   },
   {
@@ -77,16 +85,20 @@ export const skillGroups = [
       "Tailwind CSS",
       "Flutter",
       "React Native",
+      "Expo",
+      "SQLite",
     ],
     evidence:
-      "Responsive web interfaces and cross-platform mobile delivery, including offline state management at RAION DIGITAL.",
+      "Web platforms and cross-platform mobile workflows, including SQLite-backed business data, synchronization, barcode capture, reports, and secure local preferences.",
     href: "/#experience",
   },
   {
     name: "Cloud & DevOps",
     description: "From application code to a running system.",
     skills: [
+      "AWS Lightsail",
       "AWS S3",
+      "AWS ECS / ECR",
       "CloudFront",
       "GCP Cloud Run",
       "Docker",
@@ -94,8 +106,8 @@ export const skillGroups = [
       "Windows Server",
     ],
     evidence:
-      "Containerized deployments and delivery workflows across cloud and Windows Server environments.",
-    href: "/#experience",
+      "Client server management on AWS Lightsail, plus Docker delivery pipelines to AWS ECR/ECS and application operations across cloud and Windows Server environments.",
+    href: "/projects/cloud-operations/",
   },
   {
     name: "AI & Automation",
@@ -109,8 +121,8 @@ export const skillGroups = [
       "AI microservices",
     ],
     evidence:
-      "A Telegram assistant that automates transcription, summarization, and session archiving.",
-    href: "/projects/telegram-ai/",
+      "Quanta AI connects conversation and document intake to reviewed business workflows. A separate coaching assistant carries session context into future follow-up.",
+    href: "/projects/quanta-ai/",
   },
   {
     name: "3D & Games",

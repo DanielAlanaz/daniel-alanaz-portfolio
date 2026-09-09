@@ -4,7 +4,7 @@ Research date: 9 September 2026.
 
 ## Evidence and limits
 
-Primary source: C:/Users/Workspace/Documents/Daniel Alanaz CV 2026.pdf, both pages visually reviewed. Additional source: Daniel's request in this conversation. The portfolio workspace was empty at inspection; no project repositories were available to review.
+Primary source: C:/Users/Workspace/Documents/Daniel Alanaz CV 2026.pdf, both pages visually reviewed. Additional sources: Daniel's descriptions in this conversation and a read-only review of the Quanta AI repository at C:/Work-Projects/VS Code Projects/Quanta-AI.
 
 Public searches for Daniel's name and the named projects did not establish reliable matching product pages or repositories. The CV's LinkedIn URL could not be read through the web tool. Name matches for unrelated products and people were excluded. This research does not establish that the projects are absent from the internet.
 
@@ -19,6 +19,8 @@ Recommended description pattern: “Built [capability] for [user/problem], owned
 ## 1. Enterprise ERP and operational systems
 
 Evidence: The CV lists enterprise ERP, manufacturing and production workflows, stock management, payroll, and eQualPro ERP. Its Silicon Computer Systems role includes architecting and maintaining enterprise solutions. General skills mention license management and Windows services.
+
+Confirmed customization example (user-supplied): Daniel found that client customizations had been implemented as one-off changes without considering similar future needs. He changed his design approach to look for dynamic, reusable implementations that could serve other clients. This required more analysis up front. The reported result was less repeat implementation work, the ability to sell existing capability to similar clients, and several customizations becoming well-received product features. No numerical time or revenue result has been supplied.
 
 Safe provisional copy: “Architecture and development work across enterprise ERP and operational software, including manufacturing, inventory, and payroll workflows.”
 

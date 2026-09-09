@@ -111,7 +111,7 @@ About copy should connect enterprise engineering with Daniel's 3D and game pract
 Create a terminal-inspired contact panel with obvious, accessible contact actions. Visitors should never need to know a command to contact Daniel.
 
 - Email: Daniel.alanaz99@gmail.com
-- LinkedIn supplied by CV: https://linkedin.com/in/daniel-alanaz
+- LinkedIn supplied by CV: https://www.linkedin.com/in/daniel-alanaz-958b8a190
 - GitHub: use only Daniel's confirmed URL.
 
 A small optional terminal can accept a fixed set of commands such as help, email, linkedin, and clear. Never execute arbitrary input. Provide equivalent labeled buttons and ordinary links.

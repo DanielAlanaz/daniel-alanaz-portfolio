@@ -23,7 +23,7 @@ npm run format:check
 npm run build
 ```
 
-The build exports the homepage, three project pages, and a 404 page to `out/`. Type checking should run after the first development or production build has generated Next.js route types. Unit tests exercise terminal command handling, normalization, and rejection of arbitrary actions.
+The build exports the homepage, five project pages, and a 404 page to `out/`. Type checking should run after the first development or production build has generated Next.js route types. Nine tests cover terminal handling, graph integrity, category expansion, search and project-link resolution.
 
 ## Deploy to Vercel
 
@@ -48,7 +48,7 @@ The homepage is a server component. Client components are limited to navigation 
 
 ## Content and ownership
 
-Current copy is grounded in Daniel's supplied CV and project names. Project graphics are explicitly labeled capability maps, not screenshots or claims about deployed architectures. No client logos, performance metrics, unverified project-specific stacks, or fabricated game footage are included.
+Current copy is grounded in Daniel's supplied CV, confirmed project descriptions, and a read-only review of Quanta AI. The network maps expertise and work; it is not a deployed-system architecture. The project pages distinguish workflow overviews from implementation guarantees. Candidate DevOps topics remain in a private editorial worksheet under `docs/`.
 
 Before public employer-facing launch, review the roles listed as ongoing, employer naming, all copy, and the CV's contact details. Supply approved screenshots, gameplay recordings, detailed architecture decisions, measurable outcomes if available, and a confirmed GitHub URL. Source-code and demo links should be added only when real destinations exist.
 
@@ -61,3 +61,5 @@ See [content guide](docs/content-guide.md) and [architecture notes](docs/archite
 Obsidian surfaces, mint-cyan accents, a precise type scale, and a real-time wireframe torus knot form the visual identity. Native scrolling and readable HTML carry the experience; the graphics layer enhances it. The scene supports manual pause, pauses offscreen and in hidden tabs, and falls back to static geometry when reduced motion is requested or WebGL is unavailable.
 
 The terminal accepts only a fixed list of commands. It never executes arbitrary input and never claims to send messages. Email, LinkedIn, and CV links also work without terminal commands.
+
+The network explorer groups AI, enterprise, cloud/IT, web/mobile, and 3D. Hover or focus previews a node; click or tap pins its details. Mobile labels also support long press. Search, cluster filters, reset, and a complete HTML list provide additional ways to explore. Mobile and reduced-motion visitors start in list view. The graph renders on demand and suspends offscreen. Detailed case studies remain available at permanent URLs.

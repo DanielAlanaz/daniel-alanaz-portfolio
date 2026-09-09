@@ -1,16 +1,26 @@
 "use client";
 import dynamic from "next/dynamic";
 import { Component, useEffect, useRef, useState, type ReactNode } from "react";
-import { Pause, Play } from "lucide-react";
+import { Pause, Play, RotateCcw, Move } from "lucide-react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 const Scene = dynamic(() => import("./scene"), { ssr: false });
 
 class SceneBoundary extends Component<
-  { children: ReactNode },
+  { children: ReactNode; onFailure: () => void },
   { failed: boolean }
 > {
   state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
+  }
+  componentDidCatch() {
+    this.props.onFailure();
   }
   render() {
     return this.state.failed ? null : this.props.children;
@@ -19,22 +29,32 @@ class SceneBoundary extends Component<
 export function HeroArt() {
   const container = useRef<HTMLDivElement>(null);
   const [supported, setSupported] = useState(false);
+  const [contextReady, setContextReady] = useState(true);
   const [active, setActive] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
+  const reducedMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end start"],
+  });
+  const progress = useSpring(scrollYProgress, { stiffness: 110, damping: 28 });
+  const sculptureY = useTransform(progress, [0, 1], [0, 48]);
+  const backgroundY = useTransform(progress, [0, 1], [0, -24]);
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const canvas = document.createElement("canvas");
     let available = false;
     try {
-      const gl = canvas.getContext("webgl2");
-      available = !!gl;
-      gl?.getExtension("WEBGL_lose_context")?.loseContext();
+      available = !!canvas.getContext("webgl2", {
+        alpha: true,
+        antialias: false,
+        failIfMajorPerformanceCaveat: false,
+        powerPreference: "default",
+      });
     } catch {
       available = false;
     }
-    const update = () => setSupported(available && !media.matches);
-    update();
-    media.addEventListener("change", update);
+    const supportFrame = requestAnimationFrame(() => setSupported(available));
     let visible = false;
     const sync = () => setActive(visible && !document.hidden);
     const observer = new IntersectionObserver(([entry]) => {
@@ -44,17 +64,24 @@ export function HeroArt() {
     if (container.current) observer.observe(container.current);
     document.addEventListener("visibilitychange", sync);
     return () => {
+      cancelAnimationFrame(supportFrame);
       observer.disconnect();
-      media.removeEventListener("change", update);
       document.removeEventListener("visibilitychange", sync);
     };
   }, []);
   return (
-    <div ref={container} className="hero-art">
+    <div
+      ref={container}
+      className={`hero-art ${supported && contextReady ? "has-webgl" : "is-fallback"}`}
+    >
       <div className="art-coordinate coordinate-top">
         FIG. 001 <span>CONNECTED THINKING</span>
       </div>
-      <div className="scene-fallback" aria-hidden="true">
+      <motion.div
+        className="scene-fallback"
+        aria-hidden="true"
+        style={{ y: reducedMotion ? 0 : backgroundY }}
+      >
         <svg viewBox="0 0 600 600">
           <defs>
             <radialGradient id="sceneGlow">
@@ -76,24 +103,49 @@ export function HeroArt() {
             ))}
           </g>
         </svg>
-      </div>
+      </motion.div>
       {supported && (
-        <div className="canvas-layer" aria-hidden="true">
-          <SceneBoundary>
-            <Scene active={active && !paused} />
+        <motion.div
+          className="canvas-layer"
+          style={{ y: reducedMotion ? 0 : sculptureY }}
+          aria-hidden={!active}
+        >
+          <SceneBoundary onFailure={() => setSupported(false)}>
+            <Scene
+              active={active && !paused && !reducedMotion}
+              resetKey={resetKey}
+              onContextChange={setContextReady}
+            />
           </SceneBoundary>
-        </div>
+        </motion.div>
       )}
       <div className="art-coordinate coordinate-bottom">
-        <span>REAL-TIME / THREE.JS</span>
+        <span className="scene-hint">
+          {supported ? (
+            <>
+              <Move size={13} /> DRAG TO ROTATE
+            </>
+          ) : (
+            "REAL-TIME / THREE.JS"
+          )}
+        </span>
         {supported && (
-          <button
-            onClick={() => setPaused(!paused)}
-            aria-label={paused ? "Play 3D animation" : "Pause 3D animation"}
-          >
-            {paused ? <Play size={12} /> : <Pause size={12} />}
-            {paused ? "PLAY" : "PAUSE"}
-          </button>
+          <div className="scene-actions">
+            <button
+              onClick={() => setResetKey((value) => value + 1)}
+              aria-label="Reset sculpture view"
+              title="Reset view (Home)"
+            >
+              <RotateCcw size={13} />
+            </button>
+            <button
+              onClick={() => setPaused(!paused)}
+              aria-label={paused ? "Play 3D animation" : "Pause 3D animation"}
+            >
+              {paused ? <Play size={12} /> : <Pause size={12} />}
+              {paused ? "PLAY" : "PAUSE"}
+            </button>
+          </div>
         )}
       </div>
       <span className="art-axis" aria-hidden="true">

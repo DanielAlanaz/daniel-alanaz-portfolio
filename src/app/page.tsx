@@ -13,30 +13,31 @@ import {
 import { HeroArt } from "@/features/hero-scene/hero-art";
 import { MagneticLink } from "@/components/ui/magnetic-link";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { ProjectGrid } from "@/features/projects/project-grid";
+import { NetworkExplorer } from "@/features/network/network-explorer";
+import { CloudSection } from "@/components/sections/cloud-section";
 import { SkillsMatrix } from "@/features/skills/skills-matrix";
 import { ContactTerminal } from "@/features/contact/contact-terminal";
-import { projects, experiments } from "@/content/projects";
+import { experiments } from "@/content/projects";
 import { experience, profile } from "@/content/profile";
 
 const approaches = [
   {
     icon: Layers3,
-    title: "Architecture with intent.",
-    text: "Translate business requirements into clear system boundaries, maintainable services, and APIs built for the application around them.",
-    foot: "SYSTEM DESIGN / INTEGRATION",
+    title: "For the user.",
+    text: "Understand the real work behind the request, remove unnecessary steps, and make powerful features feel clear in daily use.",
+    foot: "SIMPLICITY / WORKFLOW / VALUE",
   },
   {
     icon: Workflow,
-    title: "Intelligence, integrated.",
-    text: "Connect Python agents, language models, and external services to turn repeated tasks into practical, automated workflows.",
-    foot: "AI SERVICES / AUTOMATION",
+    title: "For the engineering team.",
+    text: "Turn an idea into a complete solution with reusable boundaries, a practical delivery path, and enough clarity for the team to build it well.",
+    foot: "ARCHITECTURE / DELIVERY / STANDARDS",
   },
   {
     icon: GitBranch,
-    title: "Built to be delivered.",
-    text: "Bring architecture into production through containerized deployments, CI/CD, thoughtful code reviews, and a shared engineering standard.",
-    foot: "CLOUD / ENGINEERING LEADERSHIP",
+    title: "For the business.",
+    text: "Evaluate the impact, cost, risk, and future value of an idea before deciding what belongs in the product and what should stay specific.",
+    foot: "IMPACT / COST / PRODUCT JUDGMENT",
   },
 ];
 
@@ -63,8 +64,9 @@ export default function Home() {
               <span className="accent-text">dimensions.</span>
             </h1>
             <p className="hero-description">
-              I build enterprise platforms, connect intelligence to real
-              workflows, and lead teams from architecture to delivery.
+              I turn business ideas into complete products—connecting user
+              needs, engineering decisions, delivery cost, and long-term value
+              from the first conversation to daily operation.
             </p>
             <div className="hero-actions">
               <MagneticLink href="#work" down>
@@ -91,11 +93,11 @@ export default function Home() {
 
       <div className="expertise-strip">
         <div className="shell">
-          <span>Architecture</span>
+          <span>AI engineering</span>
           <span className="strip-cross">+</span>
-          <span>Engineering leadership</span>
+          <span>Enterprise systems</span>
           <span className="strip-cross">+</span>
-          <span>AI & automation</span>
+          <span>Cloud & infrastructure</span>
           <span className="strip-cross">+</span>
           <span>Real-time 3D</span>
         </div>
@@ -104,11 +106,11 @@ export default function Home() {
       <section id="work" className="section shell">
         <SectionHeading
           number="01"
-          label="SELECTED SYSTEMS"
-          title="Complex problems. Clear solutions."
-          description="A selection of enterprise platforms and intelligent workflows I’ve helped bring to life."
+          label="CONNECTED EXPERTISE"
+          title="Different disciplines. Connected thinking."
+          description="Explore the projects, business domains, and infrastructure behind my work."
         />
-        <ProjectGrid projects={projects} />
+        <NetworkExplorer />
         <div className="work-note">
           <Braces size={16} />
           <p>
@@ -121,13 +123,14 @@ export default function Home() {
         </div>
       </section>
 
+      <CloudSection />
       <section id="approach" className="section approach-section">
         <div className="shell">
           <SectionHeading
             number="02"
-            label="ENGINEERING APPROACH"
-            title="Beyond the implementation."
-            description="Good engineering is as much about the decisions as it is about the code."
+            label="PRODUCT & ENGINEERING APPROACH"
+            title="Finding the common ground."
+            description="Every decision has to make sense for the user, the team building it, and the business behind it."
           />
           <div className="approach-grid">
             {approaches.map(({ icon: Icon, title, text, foot }, i) => (
@@ -145,9 +148,9 @@ export default function Home() {
           <div className="approach-statement">
             <span className="mono">THE THROUGH LINE</span>
             <p>
-              Understand the problem.
+              Understand every side.
               <br />
-              Make the complex <em>work simply.</em>
+              Build the solution that <em>serves them together.</em>
             </p>
             <div className="statement-icon" aria-hidden="true">
               <Scan size={76} strokeWidth={0.7} />
@@ -267,15 +270,17 @@ export default function Home() {
         <div className="about-copy">
           <p>
             I’m Daniel, a full-stack architect and engineering team lead based
-            in Beirut. Over 4+ years, I’ve worked across web, mobile, backend,
-            and cloud systems—connecting technical decisions to the people and
-            businesses they serve.
+            in Beirut. I work where product, engineering, and business meet:
+            understanding client operations, shaping the right solution, guiding
+            the team through delivery, and supporting the system after it
+            reaches real users.
           </p>
           <p>
-            I enjoy moving between disciplines: designing an API, reviewing a
-            teammate’s code, integrating an AI service, or shaping a 3D asset.
-            My background also includes a degree in archaeology from the
-            Lebanese University.
+            My perspective comes from building across the whole lifecycle and
+            stack—from enterprise accounting and operational software to web,
+            mobile, cloud, AI, integrations, and real-time 3D. I look for the
+            common ground between a simpler user workflow, a maintainable
+            engineering path, and a decision that makes business sense.
           </p>
           <div className="about-facts">
             <span>
